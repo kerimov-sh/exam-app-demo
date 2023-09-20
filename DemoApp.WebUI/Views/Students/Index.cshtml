@@ -1,0 +1,50 @@
+﻿@model ModelBase<ICollection<DemoApp.Business.DataTransferObjects.StudentDto>>
+@{
+	
+	ViewData["Title"] = "Şagirdlər";
+}
+
+<h2 class="mb-5">@ViewData["Title"]</h2>
+
+@if (Model.ErrorMessages.Any())
+{
+	<div class="m-2">
+		@foreach (var message in Model.ErrorMessages)
+		{
+			<p class="text-danger mb-0">* @message</p>
+		}
+	</div>
+}
+
+<div class="row">
+	<div class="col-sm-12 text-end">
+		<a class="btn btn-primary" asp-action="Add">Əlavə et</a>
+	</div>
+</div>
+
+<table class="table table-bordered table-striped mt-3" style="width: 100%">
+	<thead>
+		<tr>
+			<th class="text-center">Nömrəsi</th>
+			<th class="text-center">Adı</th>
+			<th class="text-center">Soyadı</th>
+			<th class="text-center">Sinfi</th>
+			<th style="width: 10%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var dto in Model.Data)
+		{
+			<tr>
+				<td class="p-1">@dto.Number</td>
+				<td class="p-1">@dto.Name</td>
+				<td class="p-1">@dto.Surname</td>
+				<td class="p-1">@dto.Class</td>
+				<td>
+					<a class="btn btn-warning" asp-action="Edit" asp-route-number="@dto.Number">Dəyiş</a>
+					<a class="btn btn-danger" asp-action="Delete" asp-route-number="@dto.Number">Sil</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

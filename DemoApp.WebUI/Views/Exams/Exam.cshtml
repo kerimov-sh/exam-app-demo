@@ -1,0 +1,56 @@
+﻿@model DemoApp.WebUI.Models.ExamModel
+@{
+}
+
+@if (Model.ErrorMessages.Any())
+{
+	<div class="m-2">
+		@foreach (var message in Model.ErrorMessages)
+		{
+			<p class="text-danger mb-0">* @message</p>
+		}
+	</div>
+}
+
+@using (Html.BeginForm(Model.IsEdit ? "Edit" : "Add", "Exams", null, FormMethod.Post, true, null))
+{
+	<input type="hidden" asp-for="Data.Id" value="@Model.Data.Id"/>
+	<div class="row">
+		<div class="col-sm-3">
+			<label>Dərsin adı:</label>
+			<select class="form-select" required="true" asp-for="Data.LessonCode">
+				@foreach (var lesson in Model.Lessons)
+				{
+					<option value="@lesson.Code">@lesson.Name</option>
+				}
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<label>Şagirdin adı:</label>
+			<select class="form-select" required="true" asp-for="Data.StudentNumber">
+				@foreach (var student in Model.Students)
+				{
+					<option value="@student.Number">@($"{student.Name} {student.Surname}")</option>
+				}
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<label>İmtahan tarixi:</label>
+			<input type="date" class="form-control" asp-for="Data.ExamDate" required="true" value="@Model.Data.ExamDate.ToString("yyyy-MM-dd")" />
+		</div>
+		<div class="col-sm-3">
+			<label>Qiyməti:</label>
+			@Html.TextBoxFor(x => x.Data.Score, new
+			{
+				@class = "form-control",
+				@type = "number",
+				@required = true
+			})
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 text-end mt-3">
+			<button class="btn btn-primary" type="submit">Yadda Saxla</button>
+		</div>
+	</div>
+}

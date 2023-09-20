@@ -1,0 +1,49 @@
+﻿@model ModelBase<ICollection<DemoApp.Business.DataTransferObjects.ExamDto>>
+@{
+	ViewData["Title"] = "İmtahanlar";
+}
+
+<h2 class="mb-5">@ViewData["Title"]</h2>
+
+@if (Model.ErrorMessages.Any())
+{
+	<div class="m-2">
+		@foreach (var message in Model.ErrorMessages)
+		{
+			<p class="text-danger mb-0">* @message</p>
+		}
+	</div>
+}
+
+<div class="row">
+	<div class="col-sm-12 text-end">
+		<a class="btn btn-primary" asp-action="Add">Əlavə et</a>
+	</div>
+</div>
+
+<table class="table table-bordered table-striped mt-3" style="width: 100%">
+	<thead>
+	<tr>
+		<th class="text-center">Dərsin adı</th>
+		<th class="text-center">Şagirdin adı</th>
+		<th class="text-center">İmtahan tarixi</th>
+		<th class="text-center">Qiyməti</th>
+		<th style="width: 10%"></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var dto in Model.Data)
+	{
+		<tr>
+			<td class="p-1">@dto.LessonFullName</td>
+			<td class="p-1">@dto.StudentFullName</td>
+			<td class="p-1">@dto.ExamDate.ToString("yyyy-MM-dd")</td>
+			<td class="p-1">@dto.Score</td>
+			<td>
+				<a class="btn btn-warning" asp-action="Edit" asp-route-id="@dto.Id">Dəyiş</a>
+				<a class="btn btn-danger" asp-action="Delete" asp-route-id="@dto.Id">Sil</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

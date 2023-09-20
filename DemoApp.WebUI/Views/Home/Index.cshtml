@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Ana Səhifə";
+}
+
+<div class="d-flex justify-content-center">
+	<div class="card mx-3 shadow" style="width: 18rem;">
+		<div class="card-body">
+			<h4 class="card-title text-center">
+				<a class="link" asp-controller="Lessons" asp-action="Index">Dərslər</a>
+			</h4>
+		</div>
+	</div>
+	<div class="card mx-3 shadow" style="width: 18rem;">
+		<div class="card-body">
+			<h4 class="card-title text-center">
+				<a asp-controller="Students" asp-action="Index">Şagirdlər</a>
+			</h4>
+		</div>
+	</div>
+	<div class="card mx-3 shadow" style="width: 18rem;">
+		<div class="card-body">
+			<h4 class="card-title text-center">
+				<a asp-controller="Exams" asp-action="Index">İmtahanlar</a>
+			</h4>
+		</div>
+	</div>
+</div>

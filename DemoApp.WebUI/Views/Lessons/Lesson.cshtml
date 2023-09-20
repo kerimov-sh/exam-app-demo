@@ -1,0 +1,70 @@
+﻿@model DemoApp.WebUI.Models.ModelBase<DemoApp.Business.DataTransferObjects.LessonDto>
+@{
+}
+
+@if (Model.ErrorMessages.Any())
+{
+	<div class="m-2">
+		@foreach (var message in Model.ErrorMessages)
+		{
+			<p class="text-danger mb-0">* @message</p>
+		}
+	</div>
+}
+
+@using (Html.BeginForm(Model.IsEdit ? "Edit" : "Add", "Lessons", null, FormMethod.Post, true, null))
+{
+	<div class="row">
+		<div class="col-sm-2">
+			<label>Dərsin kodu:</label>
+			@Html.TextBoxFor(x => x.Data.Code, Model.IsEdit ? new
+			{
+				@class = "form-control",
+				@required = true,
+				@readonly = true
+			} : new
+			{
+				@class = "form-control",
+				@required = true
+			})
+		</div>
+		<div class="col-sm-3">
+			<label>Dərsin adı:</label>
+			@Html.TextBoxFor(x => x.Data.Name, new
+			{
+				@class = "form-control",
+				@required = true
+			})
+		</div>
+		<div class="col-sm-1">
+			<label>Sinifi:</label>
+			@Html.TextBoxFor(x => x.Data.Class, new
+			{
+				@class = "form-control",
+				@type = "number",
+				@required = true
+			})
+		</div>
+		<div class="col-sm-3">
+			<label>Dərsi verən müəllimin adı:</label>
+			@Html.TextBoxFor(x => x.Data.TeacherName, new
+			{
+				@class = "form-control",
+				@required = true
+			})
+		</div>
+		<div class="col-sm-3">
+			<label>Dərsi verən müəllimin soyadı:</label>
+			@Html.TextBoxFor(x => x.Data.TeacherSurname, new
+			{
+				@class = "form-control",
+				@required = true
+			})
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 text-end mt-3">
+			<button class="btn btn-primary" type="submit">Yadda Saxla</button>
+		</div>
+	</div>
+}
